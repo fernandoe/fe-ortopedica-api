@@ -3,9 +3,21 @@ sudo: required
 services:
 - docker
 
+env:
+  global:
+  - secure: b2uTnVLhMVkKqoAk9ef1F9CVFJbIJPLXVRT49ENqPjDxKqaRybrZ1YjBRWbn5aovnpiyDzLMSuO9d66VT+BcXoMhAxtKjZOrqZwHVHzCfno6wzWAGZyDb0qvHiANV8qySA9JRVfhPtTbFaiGjH1AcZ+r0x11TtW1Da9Q54VUmdtZg5Sf903+mS/bjA/6nlAY5f+wjQX0Kw1RjrX2LcL6A3HCL+QSpbvBLtiinMJzbbXhttzlkeLFTZxvl186A5+BLUQqnucG3+3tnKd0a5KOGVRR7sv2eHyWFr8NzTOnTFJc/xpXkNsJo2t1QXP+d33fxbrQ+Zq8hepHv6Az+P1U44lroei1Y4QRKQ6yFhG42l061xomCgP1svayykGIcjLCx3Q6rKxuGAql9FxXqx9j4Kxbd4VUPPDz/UJikvWiQnY/5s1Ms3nHFQqigagCtwiXMVYykXP2aTjP6xNbIJYH6HEXqJdrBiX/4dmEaqZ5m/U0ssRP6t5zN9XopGzoqeNjuLUxcQoSWP1ixaoLr1bYPYRDpDSqpnT8XrlPDbXyEcZpIma44YZ3G+bMc6Ptf+rxxhiXMmAw07L750Qx8UAqsfDyDeT94L8yGRQtymy/8o1qnpkMXTlsDBRoQGz9zFlt7JTvFJllha3E5nCA9UF+V2GXbkng6u14/G49fqrSJg0=
+  - secure: nNHwU03Xg7Eu1NqCd6HJn1JeyfIn6nqw2DNMn6439TW9f0w2VPECneq81mJ2j67+f2XOfSTbhPXc+uStcQLL6rE+xP/AS2aLn+5G+9OZfAoRoXBd5ryF8Meb+TDeS4o3O7N+n/qR9qolplxeabwXEOZYBzWcTrcWm0164SZELUHgQYY+c9MjYHPPNKjz5rSHP3LmMXOYmjWkmAuL2mXS5S5+K142t0tsiaj1rPvABLovx3rYSR926npeiI6tDt474LfavhBoTBk0LxMVA1tDc+NkP8ATV/BiyZJnp/vmYu+Bg/FQScVM3uP6oQzQ5YCuC6za6gtvKjsq2VZMUDZJbr/0d5it1I/XJpz7p+emW/GLXpu/t+f1kCghgn8AwpsvjH175mg/VU8qIJ/AXjGQzbOdVA3EO+jpDURjQkFEyAJz+H+tRyi8uLqFHEJH3ADIxel+++9tEHDDrPeooFvyIvWSp80FGwEfpH09GTJvjN/jD0cjHMpdHqWb6tU4RyYafwclazwSRHC/CTYC7jflY17qaD5cf9WsppVi5UFLZaex99xpkbC2r5JEe4/I4p1DQoDT60xJIdtEnnKlFCVjkMGQASSG2yRfzW6q3d5AvoZGtJNj6vGqDUEjWniLN0FJvE6ArvkHTJy1GAibi0NndJ0goqCwTjlQk7wzoTlyZRE=
+  - secure: flfeBMClBWK+fImC3waTh9NEsD+9KBUD6l+zphl050n52crwL/6ztLZNYjvaydLXdjMqqDn3jMYzj4+2svHYoZZo6091ux/geE9990dWBSRKwoA2xABr/RaN/3PwoBbRvSopJh6bdIoawa03q6CTTreGi21f17b3omePgbZa/5Kg9BUUjchm6h/XL76g3hZM0CLbkzGMu5+Ou7ZO6OXBaNxVZx/Px62Og/hX/jTuxvN7EgrO/R1oYFfsEqVzSjaR15aGBUcW3HVs0LE1wGr/mK0Leu1qHQEbyf81zBMVstSGX/3Y+8/KyQgNwtv407QpTA2uUhq7YHd3YOUMiMdgYXmNEcrXIj9F6iqhfLKxR8h3D1PnWhme8UWKmkMz9WtU8BFLAOtFr1G+ZLtTJfhkN+N9I9YzZBnlyGmj0B3RqCpi3aqJLwMGuYQaeyYoM/Bi9fXo7b96tq+dab/9/tcGD6w2mRze4rtb5MSFCf3QR3P3XiZRmbGdKEv7y0ec9zTPLZuNbzWScWGYB9vTABCMeDUKU11S+MvQKQioaapeJOBs8owrnQGSNOIw3Gq3A7Uz3TET1I3XOnbgLYIGK9PFq4pbCiZXu2J7tzDYPDm26D0P3x1hYbY3YwA+UXN5lE3LX5fmM0W1g4BrJfMegmNmxho0K6NH4ydR7y7uaWnDYw0=
+
+before_install:
+  - echo "$DOCKER_PASS" | docker login -u $DOCKER_USER --password-stdin
+
 install:
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
   - docker build -f Dockerfile -t $TRAVIS_REPO_SLUG:$TAG .
 
 script:
   - make ci.test
+
+after_success:
+  - docker push $TRAVIS_REPO_SLUG
