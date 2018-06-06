@@ -8,7 +8,7 @@ chmod +x ./kubectl
 
 NAMESPACE="${PROJECT_NAME}-${TAG//./-}"
 
-if ! kubectl get namespace "${NAMESPACE}"; then
+if ! ./kubectl get namespace "${NAMESPACE}"; then
     ./kubectl create namespace "${NAMESPACE}"
 fi
 
