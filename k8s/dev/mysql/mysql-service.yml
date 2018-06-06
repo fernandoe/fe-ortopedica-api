@@ -8,6 +8,4 @@ spec:
   ports:
     - port: 3306
   selector:
-    app: ortopedica-api
-    tier: mysql
-  clusterIP: None
+    app: mysql

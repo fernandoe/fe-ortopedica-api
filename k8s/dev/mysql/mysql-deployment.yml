@@ -8,11 +8,12 @@ spec:
     metadata:
       labels:
         app: mysql
-        service: ortopedica-api
     spec:
       containers:
       - name: mysql
         image: mysql:5.7.21
+        ports:
+          - containerPort: 3306
         env:
           - name: MYSQL_ROOT_PASSWORD
             value: password
