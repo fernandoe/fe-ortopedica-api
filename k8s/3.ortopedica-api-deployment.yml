@@ -2,7 +2,6 @@ apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: ortopedica-api
-  namespace: ortopedica-api
 spec:
   replicas: 1
   template:
@@ -13,7 +12,7 @@ spec:
     spec:
       containers:
       - name: ortopedica-api
-        image: fernandoe/fe-ortopedica-api:release-0.0.1
+        image: fernandoe/fe-ortopedica-api:0.0.1
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
