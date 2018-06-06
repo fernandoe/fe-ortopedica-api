@@ -1,0 +1,27 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: ortopedica-api
+  namespace: ortopedica-api
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ortopedica-api
+        service: ortopedica-api
+    spec:
+      containers:
+      - name: ortopedica-api
+        image: fernandoe/fe-ortopedica-api:release-0.0.1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+        env:
+          - name: DJANGO_SETTINGS_MODULE
+            value: 'server.settings.docker'
+          - name: DATABASE_URL
+            valueFrom:
+              secretKeyRef:
+                name: ortopedica-api
+                key: database_url

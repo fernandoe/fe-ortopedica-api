@@ -11,3 +11,5 @@ NAMESPACE="${PROJECT_NAME}-${TAG//./-}"
 if ! kubectl get namespace "${NAMESPACE}"; then
     ./kubectl create namespace "${NAMESPACE}"
 fi
+
+./kubectl apply -f ./k8s/3.ortopedica-api-deployment.yml -n ${NAMESPACE}
