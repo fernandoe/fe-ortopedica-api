@@ -29,9 +29,9 @@ deploy:
   skip_cleanup: true
   provider: script
   script:
-  - "./scripts/deploy.sh"
+    - "./scripts/deploy.sh"
   on:
     branch:
-    - master
-    - release-0.0.2
-    - "/(\\d+\\.)?(\\d+\\.)?(\\*|\\d+)$/"
+      - master
+      - release-0.0.2
+      - "/(\\d+\\.)?(\\d+\\.)?(\\*|\\d+)$/"
