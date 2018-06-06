@@ -1,0 +1,18 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mysql
+        service: ortopedica-api
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:5.7.21
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: password

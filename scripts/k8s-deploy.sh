@@ -12,4 +12,4 @@ if ! ./kubectl get namespace "${NAMESPACE}"; then
     ./kubectl create namespace "${NAMESPACE}"
 fi
 
-./kubectl apply -f ./k8s/3.ortopedica-api-deployment.yml -n ${NAMESPACE}
+./kubectl apply --recursive -f ./k8s/dev/ -n ${NAMESPACE}
