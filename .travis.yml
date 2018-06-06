@@ -26,12 +26,7 @@ after_success:
   - docker push $TRAVIS_REPO_SLUG
 
 deploy:
-  skip_cleanup: true
   provider: script
-  script:
-    - "./scripts/deploy.sh"
+  script: ./scripts/deploy.sh
   on:
-    branch:
-      - master
-      - release-0.0.2
-      - "/(\\d+\\.)?(\\d+\\.)?(\\*|\\d+)$/"
+    branch: release-0.0.2
