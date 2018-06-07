@@ -12,4 +12,5 @@ if ! ./kubectl get namespace "${NAMESPACE}"; then
     ./kubectl create namespace "${NAMESPACE}"
 fi
 
-./kubectl apply --recursive -f ./k8s/dev/ -n ${NAMESPACE}
+./kubectl apply --recursive -f ./k8s/dev/mysql/ -n ${NAMESPACE}
+
