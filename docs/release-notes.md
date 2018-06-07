@@ -4,7 +4,7 @@
 
 ## 0.0.2-DEV
 
-- Add deployment scripts to azure kubernetes
+- Add kubernetes config files to deploy the app into the dev stack
 
 
 
