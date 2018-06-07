@@ -20,3 +20,6 @@ sed -ie 's/ortopedica-api\.dev\.fernandoe\.com/'"${NAMESPACE}"'.dev.fernandoe.co
 sed -ie 's/ortopedica-api\.dev\.fernandoe\.com/'"${NAMESPACE}"'.dev.fernandoe.com/g' k8s/dev/ortopedica-api/6.ortopedica-api-ingress.yml
 
 ./kubectl apply --recursive -f ./k8s/dev/ -n ${NAMESPACE}
+
+./kubectl scale -n ${NAMESPACE} --replicas=0 deploy/ortopedica-api
+./kubectl scale -n ${NAMESPACE} --replicas=1 deploy/ortopedica-api

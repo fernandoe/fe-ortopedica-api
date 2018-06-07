@@ -3,3 +3,4 @@ repos:
     rev: v1.3.0
     hooks:
       - id: flake8
+      - id: end-of-file-fixer

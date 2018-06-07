@@ -16,6 +16,7 @@ spec:
         command: ["sh", "-c", "until mysql -hmysql -uroot -ppassword -se 'SELECT EXISTS(SELECT 1 FROM mysql.user WHERE user = \"root\")'; do echo waiting for database; sleep 2; done;"]
       - name: run-migration
         image: fernandoe/fe-ortopedica-api:0.0.1
+        imagePullPolicy: Always
         command: ["python", "manage.py", "migrate"]
         env:
           - name: DJANGO_SETTINGS_MODULE
