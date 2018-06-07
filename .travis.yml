@@ -33,7 +33,8 @@ deploy:
   - provider: script
     script: ./scripts/k8s-deploy.sh
     on:
-      branch: release-0.0.2
+      all_branches: true
+#      branch: release-0.0.2
   # deploy master to production
   - provider: script
     script: ./scripts/deploy.sh
