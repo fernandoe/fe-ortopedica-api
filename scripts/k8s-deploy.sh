@@ -15,5 +15,3 @@ fi
 sed -ie 's/0.0.1/'"${TAG}"'/g' k8s/dev/ortopedica-api/3.ortopedica-api-deployment.yml
 
 ./kubectl apply --recursive -f ./k8s/dev/ -n ${NAMESPACE}
-
-#./kubectl set image deployment/ortopedica-api ortopedica-api="${TRAVIS_REPO_SLUG}:${TAG}" -n ${NAMESPACE}

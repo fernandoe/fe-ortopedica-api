@@ -17,6 +17,11 @@ spec:
       - name: run-migration
         image: fernandoe/fe-ortopedica-api:0.0.1
         command: ["python", "manage.py", "migrate"]
+        env:
+          - name: DJANGO_SETTINGS_MODULE
+            value: 'server.settings.docker'
+          - name: DATABASE_URL
+            value: mysql://root:password@mysql:3306/ortopedica
       containers:
       - name: ortopedica-api
         image: fernandoe/fe-ortopedica-api:0.0.1
