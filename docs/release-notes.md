@@ -1,11 +1,21 @@
 # Release Notes
 
 
+## 0.0.3-DEV
 
-## 0.0.2-DEV
+- Add support to build on all branches
+- Add pre-commit with flake8
+- Add ortopedica app
+- Add InstitutionModelSerializer, InstitutionModelViewSet
+- Add pytest-cov, coverage and coveralls. Configure the https://coveralls.io service
+
+
+
+## 0.0.2
 
 - Add kubernetes config files to deploy the app into the dev stack
 - Add two initContainers to wait for the mysql and another to run the migrations
+
 
 
 ## 0.0.1
