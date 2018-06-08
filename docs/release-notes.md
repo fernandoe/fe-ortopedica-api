@@ -1,11 +1,12 @@
 # Release Notes
 
 
-## 0.0.3
+## 0.0.3-DEV
 
 - Add support to build on all branches
 - Add pre-commit with flake8
 - Add ortopedica app
+- Add InstitutionModelSerializer, InstitutionModelViewSet
 
 
 
