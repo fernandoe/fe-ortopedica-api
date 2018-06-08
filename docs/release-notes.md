@@ -7,6 +7,7 @@
 - Add pre-commit with flake8
 - Add ortopedica app
 - Add InstitutionModelSerializer, InstitutionModelViewSet
+- Add pytest-cov, coverage and coveralls. Configure the https://coveralls.io service
 
 
 
