@@ -5,4 +5,4 @@ build:
 	docker build -t '${TRAVIS_REPO_SLUG}:${TAG}' .
 
 ci.test:
-	docker run --rm -it '${TRAVIS_REPO_SLUG}:${TAG}' pytest -s; coveralls
+	docker run --rm -it '${TRAVIS_REPO_SLUG}:${TAG}' /bin/sh -c "pytest -s; coveralls"
