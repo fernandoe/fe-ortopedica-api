@@ -1,7 +1,12 @@
 # Release Notes
 
+## 0.0.4-DEV
 
-## 0.0.3-DEV
+- Integrate with the account service.
+- Include package: factory-boy==2.11.1
+
+
+## 0.0.3
 
 - Add support to build on all branches
 - Add pre-commit with flake8

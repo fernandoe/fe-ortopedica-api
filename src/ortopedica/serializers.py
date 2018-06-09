@@ -6,4 +6,4 @@ from .models import Institution
 class InstitutionModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Institution
-        fields = ('identifier', 'contact', 'doctor', 'address')
+        fields = ('uuid', 'created_at', 'updated_at', 'identifier', 'contact', 'doctor', 'address')
