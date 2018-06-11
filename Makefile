@@ -10,4 +10,5 @@ ci.test:
 		-e TRAVIS_BRANCH='${TRAVIS_BRANCH}' \
 		-e COVERALLS_REPO_TOKEN='${COVERALLS_REPO_TOKEN}' \
 		-e CODECOV_ENV='${CODECOV_ENV}' \
-		-it '${TRAVIS_REPO_SLUG}:${TAG}' /bin/sh -c "pytest -s; coveralls; codecov; env"
+		-e TRAVIS_COMMIT='${TRAVIS_COMMIT}' \
+		-it '${TRAVIS_REPO_SLUG}:${TAG}' /bin/sh -c "pytest -s; coveralls; codecov --commit ${TRAVIS_COMMIT}; env"
