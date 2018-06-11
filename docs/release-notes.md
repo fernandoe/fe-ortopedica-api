@@ -2,8 +2,9 @@
 
 ## 0.0.4-DEV
 
-- Integrate with the account service.
+- Integrate with the account service
 - Include package: factory-boy==2.11.1
+- Configure https://codecov.io service for code coveage
 
 
 ## 0.0.3
