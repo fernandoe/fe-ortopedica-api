@@ -12,4 +12,4 @@ ci.test:
 		-e CODECOV_ENV='${CODECOV_ENV}' \
 		-e TRAVIS_COMMIT='${TRAVIS_COMMIT}' \
 		-e TRAVIS='${TRAVIS}' \
-		-it '${TRAVIS_REPO_SLUG}:${TAG}' /bin/sh -c "pytest -s; coveralls --verbose; codecov --token ${CODECOV_ENV} --commit ${TRAVIS_COMMIT}; env"
+		-it '${TRAVIS_REPO_SLUG}:${TAG}' /bin/sh -c "env; pytest -s; coveralls --verbose;"
