@@ -4,6 +4,8 @@
 
 - Integrate with the account service
 - Include package: factory-boy==2.11.1
+- Add codefactor.io, codacy.com and codebeat.co as a code service
+
 
 
 ## 0.0.3
