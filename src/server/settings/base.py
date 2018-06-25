@@ -20,7 +20,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '25s92&y!-$v=+q!5e%^+5wkh59u$hjmv(+3jswn28j@m0&16qm'
+# SECRET_KEY = '25s92&y!-$v=+q!5e%^+5wkh59u$hjmv(+3jswn28j@m0&16qm'
+SECRET_KEY = 'y5k8cj857y5-$*mxs^vkyh$)a)2v9#3l-4ueeqsrhii8^rf5$#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -130,6 +131,9 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'fe_core.User'
 
 REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'fe_jwt.backends.FEMicroservicesBackend',
         'rest_framework.authentication.SessionAuthentication',

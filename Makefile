@@ -9,4 +9,7 @@ ci.test:
 		-e TRAVIS_JOB_ID='${TRAVIS_JOB_ID}' \
 		-e TRAVIS_BRANCH='${TRAVIS_BRANCH}' \
 		-e COVERALLS_REPO_TOKEN='${COVERALLS_REPO_TOKEN}' \
-		-it '${TRAVIS_REPO_SLUG}:${TAG}' /bin/sh -c "pytest -s; coveralls; env"
+		-e CODECOV_ENV='${CODECOV_ENV}' \
+		-e TRAVIS_COMMIT='${TRAVIS_COMMIT}' \
+		-e TRAVIS='${TRAVIS}' \
+		-it '${TRAVIS_REPO_SLUG}:${TAG}' /bin/sh -c "env; pytest -s; coveralls --verbose;"
