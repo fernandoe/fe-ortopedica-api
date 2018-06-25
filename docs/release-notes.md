@@ -1,6 +1,6 @@
 # Release Notes
 
-## 0.0.4-DEV
+## 0.0.4
 
 - Integrate with the account service
 - Include package: factory-boy==2.11.1
