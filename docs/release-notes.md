@@ -1,5 +1,31 @@
 # Release Notes
 
+## 0.0.5-DEV
+
+- Add models:
+    - Making
+    - Color
+    - Side
+    - AmputeeMember
+
+
+Motivos das Amputações	
+Responsáveis Técnicos	
+Situações	
+Tipos de Amputações	
+Tipos de Moldes
+
+- Add serializers:
+    - MakingModelSerializer
+    - ColorModelSerializer
+    - SideModelSerializer
+    - AmputeeMemberModelSerializer
+
+
+	
+
+
+
 ## 0.0.4
 
 - Integrate with the account service
