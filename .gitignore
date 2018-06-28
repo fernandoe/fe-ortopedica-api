@@ -1,6 +1,9 @@
+.cache
 .coverage
 .idea
 .pytest_cache
+.vscode
 __pycache__
 coverage.xml
 db.sqlite3
+htmlcov

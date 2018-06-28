@@ -4,6 +4,9 @@ TAG ?= local
 build:
 	docker build -t '${TRAVIS_REPO_SLUG}:${TAG}' .
 
+test:
+	cd src; pytest
+
 ci.test:
 	docker run --rm \
 		-e TRAVIS_JOB_ID='${TRAVIS_JOB_ID}' \

@@ -1,5 +1,50 @@
 # Release Notes
 
+## 0.0.5
+
+- Add models:
+    - Making
+    - Color
+    - Side
+    - AmputeeMember
+    - AmputationReason
+    - TechnicalResponsible
+    - Situation
+    - AmputationType
+    - MoldType
+- Add serializers:
+    - MakingModelSerializer
+    - ColorModelSerializer
+    - SideModelSerializer
+    - AmputeeMemberModelSerializer
+    - AmputationReasonModelSerializer
+    - TechnicalResponsibleModelSerializer
+    - SituationModelSerializer
+    - AmputationTypeModelSerializer
+    - MoldTypeModelSerializer
+- Add views:
+    - MakingModelViewSet
+    - ColorModelViewSet
+    - SideModelViewSet
+    - AmputeeMemberModelViewSet
+    - AmputationReasonModelViewSet
+    - TechnicalResponsibleModelViewSet
+    - SituationModelViewSet
+    - AmputationTypeModelViewSet
+    - MoldTypeModelViewSet
+- Add Django Admin Views
+    - Making
+    - Color
+    - Side
+    - AmputeeMember
+    - AmputationReason
+    - TechnicalResponsible
+    - Situation
+    - AmputationType
+    - MoldType
+
+
+
 ## 0.0.4
 
 - Integrate with the account service
