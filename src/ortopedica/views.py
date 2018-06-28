@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 
-from .models import Making, Institution, Color, Side, AmputeeMember, AmputationReason, TechnicalResponsible, Situation, \
-    AmputationType, MoldType
+from .models import Making, Institution, Color, Side, AmputeeMember, AmputationReason, TechnicalResponsible, \
+    Situation, AmputationType, MoldType
 from .serializers import MakingModelSerializer, InstitutionModelSerializer, ColorModelSerializer, SideModelSerializer, \
     AmputeeMemberModelSerializer, AmputationReasonModelSerializer, TechnicalResponsibleModelSerializer, \
     SituationModelSerializer, AmputationTypeModelSerializer, MoldTypeModelSerializer
