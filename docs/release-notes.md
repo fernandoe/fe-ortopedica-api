@@ -1,6 +1,6 @@
 # Release Notes
 
-## 0.0.5-DEV
+## 0.0.5
 
 - Add models:
     - Making
