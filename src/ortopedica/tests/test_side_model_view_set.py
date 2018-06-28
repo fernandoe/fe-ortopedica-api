@@ -4,8 +4,8 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 from rest_framework_jwt.settings import api_settings
 
-from .factories import MakingFactory
-from ..models import Making
+from .factories import SideFactory
+from ..models import Side
 
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
@@ -25,27 +25,27 @@ class TestSideModelViewSet(APITestCase):
         self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + user_token)
 
     def test_create_with_only_user(self):
-        response = self.client.post(reverse('making-list'), {
+        response = self.client.post(reverse('side-list'), {
             'name': 'any name',
         })
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        obj = Making.objects.get(uuid=response.data['uuid'])
+        obj = Side.objects.get(uuid=response.data['uuid'])
         self.assertIsNone(obj.entity)
         self.assertEqual(obj.user, self.user)
 
     def test_create_with_entity(self):
         self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + str(self.user_with_entity_token))
-        response = self.client.post(reverse('making-list'), {
+        response = self.client.post(reverse('side-list'), {
             'name': 'any name'
         })
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        obj = Making.objects.get(uuid=response.data['uuid'])
+        obj = Side.objects.get(uuid=response.data['uuid'])
         self.assertEqual(obj.entity, self.entity)
         self.assertEqual(obj.user, self.user_with_entity)
 
     def test_get_with_user(self):
-        obj = MakingFactory(user=self.user)
-        response = self.client.get(reverse('making-detail', kwargs={'pk': str(obj.uuid)}))
+        obj = SideFactory(user=self.user)
+        response = self.client.get(reverse('side-detail', kwargs={'pk': str(obj.uuid)}))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         entity = response.data
         self.assertTrue('uuid' in entity)
@@ -57,8 +57,8 @@ class TestSideModelViewSet(APITestCase):
 
     def test_get_with_entity(self):
         self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + str(self.user_with_entity_token))
-        obj = MakingFactory(user=self.user, entity=self.entity)
-        response = self.client.get(reverse('making-detail', kwargs={'pk': str(obj.uuid)}))
+        obj = SideFactory(user=self.user, entity=self.entity)
+        response = self.client.get(reverse('side-detail', kwargs={'pk': str(obj.uuid)}))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         entity = response.data
         self.assertTrue('uuid' in entity)
@@ -69,8 +69,8 @@ class TestSideModelViewSet(APITestCase):
         self.assertEqual(5, len(entity))
 
     def test_update_with_user_with_patch(self):
-        obj = MakingFactory(user=self.user)
-        response = self.client.patch(reverse('making-detail', kwargs={'pk': str(obj.uuid)}), {
+        obj = SideFactory(user=self.user)
+        response = self.client.patch(reverse('side-detail', kwargs={'pk': str(obj.uuid)}), {
             'name': 'ABC'
         })
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -78,8 +78,8 @@ class TestSideModelViewSet(APITestCase):
         self.assertEqual(obj.name, 'ABC')
 
     def test_update_with_user_with_put(self):
-        obj = MakingFactory(user=self.user)
-        response = self.client.put(reverse('making-detail', kwargs={'pk': str(obj.uuid)}), {
+        obj = SideFactory(user=self.user)
+        response = self.client.put(reverse('side-detail', kwargs={'pk': str(obj.uuid)}), {
             'name': obj.name,
             'enabled': obj.enabled
         })
@@ -89,8 +89,8 @@ class TestSideModelViewSet(APITestCase):
         self.assertEqual(obj.enabled, response.data['enabled'])
 
     def test_delete_with_user(self):
-        obj = MakingFactory(user=self.user)
-        self.assertEqual(1, Making.objects.filter(uuid=obj.uuid).count())
-        response = self.client.delete(reverse('making-detail', kwargs={'pk': str(obj.uuid)}))
+        obj = SideFactory(user=self.user)
+        self.assertEqual(1, Side.objects.filter(uuid=obj.uuid).count())
+        response = self.client.delete(reverse('side-detail', kwargs={'pk': str(obj.uuid)}))
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-        self.assertEqual(0, Making.objects.filter(uuid=obj.uuid).count())
+        self.assertEqual(0, Side.objects.filter(uuid=obj.uuid).count())
