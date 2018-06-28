@@ -32,6 +32,16 @@
     - SituationModelViewSet
     - AmputationTypeModelViewSet
     - MoldTypeModelViewSet
+- Add Django Admin Views
+    - Making
+    - Color
+    - Side
+    - AmputeeMember
+    - AmputationReason
+    - TechnicalResponsible
+    - Situation
+    - AmputationType
+    - MoldType
 
 
 
