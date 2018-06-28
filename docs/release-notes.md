@@ -22,6 +22,16 @@
     - SituationModelSerializer
     - AmputationTypeModelSerializer
     - MoldTypeModelSerializer
+- Add views:
+    - MakingModelViewSet
+    - ColorModelViewSet
+    - SideModelViewSet
+    - AmputeeMemberModelViewSet
+    - AmputationReasonModelViewSet
+    - TechnicalResponsibleModelViewSet
+    - SituationModelViewSet
+    - AmputationTypeModelViewSet
+    - MoldTypeModelViewSet
 
 
 
