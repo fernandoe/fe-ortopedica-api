@@ -7,22 +7,21 @@
     - Color
     - Side
     - AmputeeMember
-
-
-Motivos das Amputações	
-Responsáveis Técnicos	
-Situações	
-Tipos de Amputações	
-Tipos de Moldes
-
+    - AmputationReason
+    - TechnicalResponsible
+    - Situation
+    - AmputationType
+    - MoldType
 - Add serializers:
     - MakingModelSerializer
     - ColorModelSerializer
     - SideModelSerializer
     - AmputeeMemberModelSerializer
-
-
-	
+    - AmputationReasonModelSerializer
+    - TechnicalResponsibleModelSerializer
+    - SituationModelSerializer
+    - AmputationTypeModelSerializer
+    - MoldTypeModelSerializer
 
 
 

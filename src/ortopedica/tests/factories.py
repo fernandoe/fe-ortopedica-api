@@ -4,7 +4,8 @@ import factory
 from faker import Factory
 from fe_core.factories import EntityFactory, UserFactory
 
-from ..models import Making, Color, Side, AmputeeMember, Institution
+from ..models import Making, Color, Side, AmputeeMember, AmputationReason, TechnicalResponsible, Situation, \
+    Institution, AmputationType, MoldType
 
 fake = Factory.create('pt_BR')
 
@@ -47,6 +48,56 @@ class AmputeeMemberFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = AmputeeMember
+
+
+class AmputationReasonFactory(factory.django.DjangoModelFactory):
+    uuid = factory.Sequence(lambda n: str(uuid.uuid4()))
+    user = factory.SubFactory(UserFactory)
+    entity = factory.SubFactory(EntityFactory)
+    name = fake.name()
+
+    class Meta:
+        model = AmputationReason
+
+
+class TechnicalResponsibleFactory(factory.django.DjangoModelFactory):
+    uuid = factory.Sequence(lambda n: str(uuid.uuid4()))
+    user = factory.SubFactory(UserFactory)
+    entity = factory.SubFactory(EntityFactory)
+    name = fake.name()
+
+    class Meta:
+        model = TechnicalResponsible
+
+
+class SituationFactory(factory.django.DjangoModelFactory):
+    uuid = factory.Sequence(lambda n: str(uuid.uuid4()))
+    user = factory.SubFactory(UserFactory)
+    entity = factory.SubFactory(EntityFactory)
+    name = fake.name()
+
+    class Meta:
+        model = Situation
+
+
+class AmputationTypeFactory(factory.django.DjangoModelFactory):
+    uuid = factory.Sequence(lambda n: str(uuid.uuid4()))
+    user = factory.SubFactory(UserFactory)
+    entity = factory.SubFactory(EntityFactory)
+    name = fake.name()
+
+    class Meta:
+        model = AmputationType
+
+
+class MoldTypeFactory(factory.django.DjangoModelFactory):
+    uuid = factory.Sequence(lambda n: str(uuid.uuid4()))
+    user = factory.SubFactory(UserFactory)
+    entity = factory.SubFactory(EntityFactory)
+    name = fake.name()
+
+    class Meta:
+        model = MoldType
 
 
 class InstitutionFactory(factory.django.DjangoModelFactory):
