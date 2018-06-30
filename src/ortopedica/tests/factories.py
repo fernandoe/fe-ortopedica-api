@@ -5,7 +5,7 @@ from faker import Factory
 from fe_core.factories import EntityFactory, UserFactory
 
 from ..models import Making, Color, Side, AmputeeMember, AmputationReason, TechnicalResponsible, Situation, \
-    Institution, AmputationType, MoldType
+    Institution, AmputationType, MoldType, Patient
 
 fake = Factory.create('pt_BR')
 
@@ -111,3 +111,12 @@ class InstitutionFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = Institution
+
+
+class PatientFactory(factory.django.DjangoModelFactory):
+    uuid = factory.Sequence(lambda n: str(uuid.uuid4()))
+    user = factory.SubFactory(UserFactory)
+    entity = factory.SubFactory(EntityFactory)
+
+    class Meta:
+        model = Patient
