@@ -1,10 +1,10 @@
 from rest_framework import viewsets
 
 from .models import Making, Institution, Color, Side, AmputeeMember, AmputationReason, TechnicalResponsible, \
-    Situation, AmputationType, MoldType
+    Situation, AmputationType, MoldType, Patient
 from .serializers import MakingModelSerializer, InstitutionModelSerializer, ColorModelSerializer, SideModelSerializer, \
     AmputeeMemberModelSerializer, AmputationReasonModelSerializer, TechnicalResponsibleModelSerializer, \
-    SituationModelSerializer, AmputationTypeModelSerializer, MoldTypeModelSerializer
+    SituationModelSerializer, AmputationTypeModelSerializer, MoldTypeModelSerializer, PatientModelSerializer
 
 
 class MakingModelViewSet(viewsets.ModelViewSet):
@@ -82,6 +82,14 @@ class MoldTypeModelViewSet(viewsets.ModelViewSet):
 class InstitutionModelViewSet(viewsets.ModelViewSet):
     queryset = Institution.objects.all()
     serializer_class = InstitutionModelSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user, entity=self.request.user.entity)
+
+
+class PatientModelViewSet(viewsets.ModelViewSet):
+    queryset = Patient.objects.all()
+    serializer_class = PatientModelSerializer
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user, entity=self.request.user.entity)

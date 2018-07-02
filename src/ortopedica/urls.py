@@ -2,7 +2,7 @@ from rest_framework.routers import DefaultRouter
 
 from .views import InstitutionModelViewSet, MakingModelViewSet, ColorModelViewSet, SideModelViewSet, \
     AmputeeMemberModelViewSet, AmputationReasonModelViewSet, TechnicalResponsibleModelViewSet, SituationModelViewSet, \
-    AmputationTypeModelViewSet, MoldTypeModelViewSet
+    AmputationTypeModelViewSet, MoldTypeModelViewSet, PatientModelViewSet
 
 router = DefaultRouter()
 router.register(r'making', MakingModelViewSet, base_name='making')
@@ -15,4 +15,5 @@ router.register(r'situation', SituationModelViewSet, base_name='situation')
 router.register(r'amputation-type', AmputationTypeModelViewSet, base_name='amputation-type')
 router.register(r'mold-type', MoldTypeModelViewSet, base_name='mold-type')
 router.register(r'institution', InstitutionModelViewSet, base_name='institution')
+router.register(r'patient', PatientModelViewSet, base_name='patient')
 urlpatterns = router.urls
