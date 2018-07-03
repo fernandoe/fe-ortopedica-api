@@ -117,6 +117,7 @@ class PatientFactory(factory.django.DjangoModelFactory):
     uuid = factory.Sequence(lambda n: str(uuid.uuid4()))
     user = factory.SubFactory(UserFactory)
     entity = factory.SubFactory(EntityFactory)
+    name = fake.name()
 
     class Meta:
         model = Patient

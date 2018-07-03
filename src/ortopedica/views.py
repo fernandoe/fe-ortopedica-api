@@ -94,5 +94,5 @@ class PatientModelViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user, entity=self.request.user.entity)
 
-    # def get_queryset(self):
-    #     return Patient.objects.filter(entity=self.request.user.entity)
+    def get_queryset(self):
+        return Patient.objects.filter(entity=self.request.user.entity)

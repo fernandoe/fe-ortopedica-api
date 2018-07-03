@@ -53,8 +53,9 @@ class TestPatientModelViewSet(APITestCase):
         self.assertEqual(institution.user, self.user_with_entity)
 
     def test_get_with_user(self):
-        institution = PatientFactory(user=self.user)
-        response = self.client.get(reverse('patient-detail', kwargs={'pk': str(institution.uuid)}))
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.user_with_entity_token)
+        patient = PatientFactory(entity=self.entity, user=self.user_with_entity)
+        response = self.client.get(reverse('patient-detail', kwargs={'pk': str(patient.uuid)}))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         entity = response.data
         self.assertTrue('uuid' in entity)
@@ -85,34 +86,61 @@ class TestPatientModelViewSet(APITestCase):
         self.assertEqual(8, len(entity))
 
     def test_update_with_user_with_patch(self):
-        institution = PatientFactory(user=self.user)
-        response = self.client.patch(reverse('patient-detail', kwargs={'pk': str(institution.uuid)}), {
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.user_with_entity_token)
+        patient = PatientFactory(entity=self.entity, user=self.user_with_entity)
+        response = self.client.patch(reverse('patient-detail', kwargs={'pk': str(patient.uuid)}), {
             'name': 'ABC'
         })
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        institution.refresh_from_db()
-        self.assertEqual(institution.name, 'ABC')
+        patient.refresh_from_db()
+        self.assertEqual(patient.name, 'ABC')
 
     def test_update_with_user_with_put(self):
-        institution = PatientFactory(user=self.user)
-        response = self.client.put(reverse('patient-detail', kwargs={'pk': str(institution.uuid)}), {
-            'name': institution.name,
-            'city': institution.city,
-            'phone1': institution.phone1,
-            'phone2': institution.phone2,
-            'phone3': institution.phone3
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.user_with_entity_token)
+        patient = PatientFactory(entity=self.entity, user=self.user_with_entity)
+        response = self.client.put(reverse('patient-detail', kwargs={'pk': str(patient.uuid)}), {
+            'name': patient.name,
+            'city': patient.city,
+            'phone1': patient.phone1,
+            'phone2': patient.phone2,
+            'phone3': patient.phone3
         })
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        institution.refresh_from_db()
-        self.assertEqual(institution.name, response.data['name'])
-        self.assertEqual(institution.city, response.data['city'])
-        self.assertEqual(institution.phone1, response.data['phone1'])
-        self.assertEqual(institution.phone2, response.data['phone2'])
-        self.assertEqual(institution.phone3, response.data['phone3'])
+        patient.refresh_from_db()
+        self.assertEqual(patient.name, response.data['name'])
+        self.assertEqual(patient.city, response.data['city'])
+        self.assertEqual(patient.phone1, response.data['phone1'])
+        self.assertEqual(patient.phone2, response.data['phone2'])
+        self.assertEqual(patient.phone3, response.data['phone3'])
 
     def test_delete_with_user(self):
-        institution = PatientFactory(user=self.user)
-        self.assertEqual(1, Patient.objects.filter(uuid=institution.uuid).count())
-        response = self.client.delete(reverse('patient-detail', kwargs={'pk': str(institution.uuid)}))
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.user_with_entity_token)
+        patient = PatientFactory(entity=self.entity, user=self.user_with_entity)
+        self.assertEqual(1, Patient.objects.filter(uuid=patient.uuid).count())
+        response = self.client.delete(reverse('patient-detail', kwargs={'pk': str(patient.uuid)}))
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-        self.assertEqual(0, Patient.objects.filter(uuid=institution.uuid).count())
+        self.assertEqual(0, Patient.objects.filter(uuid=patient.uuid).count())
+
+
+class TestGetQueryset(APITestCase):
+
+    def setUp(self):
+        self.entity1 = EntityFactory()
+        self.user1 = UserFactory(entity=self.entity1)
+        self.entity2 = EntityFactory()
+        self.user2 = UserFactory(entity=self.entity2)
+        payload = jwt_payload_handler(self.user1)
+        user_token = jwt_encode_handler(payload)
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + user_token)
+
+    def test_return_only_data_from_user1(self):
+        e1p1 = PatientFactory(entity=self.entity1)
+        e1p2 = PatientFactory(entity=self.entity1)
+        PatientFactory(entity=self.entity2)
+        PatientFactory(entity=self.entity2)
+        response = self.client.get(reverse('patient-list'))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        response_as_json = response.json()
+        assert 2 == response_as_json['count']
+        assert str(e1p1.uuid) == response_as_json['results'][0]['uuid']
+        assert str(e1p2.uuid) == response_as_json['results'][1]['uuid']
