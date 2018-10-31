@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import Color, Institution, Making, MoldType, AmputationType, Situation, TechnicalResponsible, \
-    AmputationReason, AmputeeMember, Side
+    AmputationReason, AmputeeMember, Side, Patient
 
 
 @admin.register(Making)
@@ -72,3 +72,10 @@ class InstitutionModelAdmin(admin.ModelAdmin):
     search_fields = ('uuid', 'identifier', 'contact', 'doctor')
     list_display = ('get_uuid', 'entity', 'user', 'identifier', 'contact', 'doctor', 'address')
     ordering = ('created_at',)
+
+
+@admin.register(Patient)
+class PatientModelAdmin(admin.ModelAdmin):
+    search_fields = ('uuid', 'nome', 'cpf', 'rg')
+    list_display = ('get_uuid', 'entity', 'user', 'name', 'cpf', 'phone1', 'phone2')
+    ordering = ('name',)

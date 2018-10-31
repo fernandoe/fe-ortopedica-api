@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from .models import Making, Color, Side, AmputeeMember, AmputationReason, TechnicalResponsible, Situation, \
-    Institution, AmputationType, MoldType
+    Institution, AmputationType, MoldType, Patient
 
 
 class MakingModelSerializer(serializers.ModelSerializer):
@@ -62,3 +62,9 @@ class InstitutionModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Institution
         fields = ('uuid', 'created_at', 'updated_at', 'identifier', 'contact', 'doctor', 'address')
+
+
+class PatientModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Patient
+        fields = ('uuid', 'created_at', 'updated_at', 'name', 'city', 'phone1', 'phone2', 'phone3')
