@@ -4,6 +4,9 @@ TAG ?= local
 build:
 	docker build -t '${TRAVIS_REPO_SLUG}:${TAG}' .
 
+requirements:
+	docker run --rm '${TRAVIS_REPO_SLUG}:${TAG}' pip freeze -r /requirements.txt
+
 test:
 	cd src; pytest
 
